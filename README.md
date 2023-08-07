@@ -6,7 +6,7 @@ The purpose of this repo is as a tutorial for getting you started using EMOD
 
 # Steps
 
-1. Download and install EMOD-DTK according to [these instructions](https://www.dropbox.com/scl/fo/q0xz7rjct84bnh03osax6/h?rlkey=qclqhe60yjvqo7v8kv6zofqqo&dl=0)
+1. Download and install EMOD-DTK according to [these instructions](https://www.dropbox.com/scl/fo/q0xz7rjct84bnh03osax6/h?rlkey=qclqhe60emoyjvqo7v8kv6zofqqo&dl=0)
 2. Clone this repo into your personal directory in the `bershteynlab` directory on bigpurple: `/gpfs/data/bershteynlab/EMOD/<your KID>`
 3. To run a simulation:
 
@@ -75,14 +75,8 @@ Follow these steps to install EMOD and DTK-Tools on BigPurple (NYU Langone's clu
 ## Configure bash and python environment
 
 1. `ssh` into BigPurple
-2. Create a virtual python environment for the purpose of holding all the python packages that DTK-Tools depends on. Run the following in the command line:
 
-```
-python -m venv ~/environments/dtk-tools-p36
-source ~/environments/dtk-tools-p36/bin/activate
-```
-
-3. Modify the bash environment to automatically launch the python environment just created. Paste the following into the `.bashrc` file:
+2. Modify the bash environment to automatically launch the python environment just created. Paste the following into the `.bashrc` file:
 
 ```
 # .bashrc
@@ -101,8 +95,18 @@ module load git/2.17.0
 source ~/environments/dtk-tools-p36/bin/activate
 export PYTHONPATH=~/environments/dtk-tools-p36/lib/python3.6/site-packages
 ```
+3. Create a virtual python environment for the purpose of holding all the python packages that DTK-Tools depends on. Run the following in the command line:
 
-Run in command line: `source ~/.bashrc`
+```
+python -m venv ~/environments/dtk-tools-p36
+```
+4. Run in command line: `source ~/.bashrc`
+
+5. Finish creating the virtual python environment
+
+```
+source ~/environments/dtk-tools-p36/bin/activate
+```
 
 ## Install DTK-Tools and Disease-Specific Packages
 
