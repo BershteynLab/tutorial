@@ -1,0 +1,76 @@
+---
+title: "tutorial_postprocessing"
+output: html_document
+---
+
+```{r Load Libraries}
+library(tidyverse)
+library(tidyr)
+library(data.table)
+library(magrittr)
+library(ggplot2)
+library(devtools)
+library(readxl)
+devtools::install_github("BershteynLab/EMODAnalyzeR")
+```
+
+# Read in simulation output
+```{r}
+
+res.path.cmd = "Path/to/tutorial/output/in/scratch/directory"
+
+sim.results <- EMODAnalyzeR::read.simulation.results.bigpurple(
+  res.path.cmd,
+  scenario_name = 'minimal',
+  summarize_columns = c("Population","Infected", "On_ART",
+                        "Died", "Died_from_HIV",
+                        "Newly.Infected","Diagnosed"),
+  stratify_columns = c("Year", "Gender", "Age"),
+  min_age_inclusive = 0,
+  max_age_inclusive = 99
+)
+
+# Census year population, for rescaling everything
+CENSUS_YEAR = 2009
+KEN_CENSUS_POP = 5352385
+
+sim.results.pop.scaling <- sim.results %>% 
+      filter(Year == CENSUS_YEAR) %>%
+      group_by(sim.id) %>%
+      summarize(total.pop = sum(Population), .groups = 'keep') %>% 
+      mutate(pop.scaling.factor = KEN_CENSUS_POP/total.pop)
+
+sim.results <- sim.results %>% 
+  inner_join(
+    sim.results.pop.scaling,
+    by = c("sim.id")
+  )
+
+```
+
+# Plot Prevalence over time
+
+Read in prevalence calibration target data
+```{r}
+ingest.file.base = "Path/to/ingest/file"
+
+obs.prev.sheet.base <- EMODAnalyzeR::read.ingest.sheet(ingest.file.base, "Obs-Prevalence")
+```
+
+
+```{r, fig.width=8}
+#p <- EMODAnalyzeR::emodplot.prevalence(sim.results %>% filter(Age <= 50, Age >=15), 
+#                                       1990, 20240)
+p <- EMODAnalyzeR::emodplot.prevalence(sim.results %>% filter(Age <= 50, Age >=15), 
+                                       1960, 1991)
+
+p +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), breaks = seq(0,0.25,0.05), limits=c(0, 0.25)) +
+    ylab("HIV Prevalence (%)") + 
+  geom_point(data = obs.prev.sheet.base %>%
+               filter(Province == 'All', AgeBin == "[15:50)", Gender %in% c("Male", "Female")),
+             mapping = aes(x = Year, y = Prevalence)) + 
+  geom_errorbar(data = obs.prev.sheet.base %>%
+             filter(Province == 'All', AgeBin == "[15:50)", Gender %in% c("Male", "Female")),
+             mapping = aes(x = Year, ymin = lb, ymax = ub))
+```
