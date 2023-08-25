@@ -107,24 +107,7 @@ Rewrite the `simtools.ini` file in the following ways:
 * Change the `input_root` to point to the correct 
 * Change the `notification_email` to your NYU email
 
-## Running a Simulation
 
-1. Use `screen` to open a virtual machine - this way if you disconnect from BigPurple for any reason you can return to your work.
-2. Request a medium-sized compute node `srun -p cpu_medium -n 2 --mem-per-cpu=8G --time=05-00:00:00 --pty bash`
-3. Use the `run_scenarios.py` script to run the simulation
+## Next steps
 
-### What is EMOD doing when we run scenarios?
-
-* Initializes an ensemble of simulation runs. Each simulation run takes its parameters from one of the lines from `resampled_parameter_sets.py`. Each simulation run spins up a job on BigPurple, so 250 simulation runs will require 250 separate threads on BigPurple, which uses [Slurm](https://slurm.schedmd.com/overview.html) to manage all of the jobs.
-* For each simulation run 
-    * EMOD builds a synthetic population
-    * Seeds the HIV epidemic
-    * Allows the epidemic to proceed forward in time
-    * Writes to output certain *reports* documents which are formatted according to the specifications given in the `config.json` file
-
-## Postprocessing
-
-Postprocessing is the final step, where we read in, aggregate, and interpret the simulation results. You can conduct postprocessing using any tools you like. Our team also has an R library with predefined functions for postprocessing simulation results. (Github repo [here](https://github.com/BershteynLab/EMODAnalyzeR/tree/main).)
-
-[Here](https://rstudio.hpc.nyumc.org/) is a tool for running a remote RStudio server on BigPurple. Start a "Standard R Job" with R version 4.0 or later. An RStudio server will open in your browser. From there, you can open [this notebook](tutorial_postprocessing.rmd) to get started with postprocessing. (You have the option of running postprocessing locally on your own machine, but it's not recommended as it would require downloading many gigabytes of files.)
-
+After downloading the DTK-Tools repo, configuring your python environment, and configuring DTK-Tools to use Slurm on BigPurple, [you should now be ready to run your first EMOD simulation.](tutorial_usage_guide.md)
