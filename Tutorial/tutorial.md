@@ -15,3 +15,7 @@ Guide to installing EMOD [here](tutorial_installation_guide.md).
 ## Usage Guide
 
 Guide to getting started using EMOD [here](tutorial_usage_guide.md)
+
+## Configuration Files
+
+* [Tutorial Campaign File](Config_Files/campaign_Nyanza_tutorial.json)
