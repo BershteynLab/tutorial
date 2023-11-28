@@ -36,7 +36,7 @@ fi
 
 # User specific aliases and functions
 
-module load singularity/3.1
+module load singularity/3.7.1
 module load python/cpu/3.6.5
 module load git/2.17.0
 
