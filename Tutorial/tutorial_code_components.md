@@ -9,7 +9,6 @@ EMOD requires a large set of configuration files.
         * List of "nodes" or sub-populations in the model, what we use to define geographically isolated metapopulations
         * All calibration target data (empirical data used to calibrate the model)
 2. Input files:
-
     1. Demographics: `InputFiles/Static/Demographics.json`
         * Contains births, deaths, and other demographic data
     2. Campaign file: `InputFiles/Templates/campaign_Nyanza_baseline_202301.json`
