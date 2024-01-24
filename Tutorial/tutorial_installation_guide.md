@@ -2,7 +2,11 @@
 
 ## Download Tutorial Repo
 
-Download the appropriate scripts, configuration files, and parameter sets for this tutorial by cloning this git repo onto BigPurple
+Download the appropriate scripts, configuration files, and parameter sets for this tutorial by cloning this git repo onto BigPurple. BigPurple is the NYU Medical Center's high performance computing cluster. BigPurple is where EMOD is installed and where we run our simulation models. There are a number of ways to do this, one way is to use a command line interface (CLI) through Terminal or PuTTY. (Another way is to use VS Code's SSH capabilities.):
+
+```
+ssh <YOUR_KID>@bigpurple.nyumc.org
+```
 
 Create and navigate to your personal folder in our team's directory:
 
@@ -10,7 +14,11 @@ Create and navigate to your personal folder in our team's directory:
 mkdir /gpfs/data/bershteynlab/EMOD/<YOUR_KID>
 
 cd /gpfs/data/bershteynlab/EMOD/<YOUR_KID>
+```
 
+Clone our git repository.
+
+```
 git clone https://github.com/BershteynLab/tutorial.git
 
 cd tutorial
@@ -44,11 +52,15 @@ source ~/environments/dtk-tools-p36/bin/activate
 export PYTHONPATH=~/environments/dtk-tools-p36/lib/python3.6/site-packages
 ```
 
-4. Create a virtual environment by running each of the following commands
+4. Create a virtual environment by running each of the following commands in the CLI.
 
-* `python -m venv ~/environments/dtk-tools-p36`
-* `source ~/environments/dtk-tools-p36/bin/activate`
-* `source ~/.bashrc `
+```
+python -m venv ~/environments/dtk-tools-p36
+
+source ~/environments/dtk-tools-p36/bin/activate
+
+source ~/.bashrc
+```
 
 Now, every time you log on to BigPurple you will be working inside the right python environment. All of your python work (e.g. installing packages, sourcing packages) will use the environment “dtk-tools-p36” because of the final source command above.
 
@@ -72,7 +84,7 @@ cd dtk-tools-p36
 python setup_manual.py
 ```
 
-Verify that the installation worked by running `dtk -h`
+Verify that the installation worked by running `dtk -h`. (If you do not get an error, you will know the installation has worked.)
 
 4. Install HIV-specific repo from github:
 
@@ -107,6 +119,19 @@ Rewrite the `simtools.ini` file in the following ways:
 * Change the `input_root` to point to the correct 
 * Change the `notification_email` to your NYU email
 
+### Configure Simulation Run Script
+
+Open the file `script.sbatch` and edit the following lines to include your KID and your email where appropriate:
+
+```
+#SBATCH --chdir=/gpfs/data/bershteynlab/EMOD/<YOUR KID>/tutorial/
+
+#SBATCH --mail-user=<YOUR EMAIL>
+
+#SBATCH --output=/gpfs/data/bershteynlab/EMOD/<YOUR KID>/tutorial/slurm_%j.out
+```
+
+We will use this script to run our simulations.
 
 ## Next steps
 

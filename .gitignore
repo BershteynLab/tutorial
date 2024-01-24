@@ -5,7 +5,7 @@
 **/__pycache__/
 **/__pycache__/*
 **/post_channel_config.json
-**/resampled_parameter_sets_short.csv
+**/resampled_parameter_sets.csv
 **/test*
 **/HIVCalibSite_*
 **/Nyanza--*
