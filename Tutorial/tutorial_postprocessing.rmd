@@ -3,9 +3,10 @@ title: "tutorial_postprocessing"
 output: html_document
 ---
 
+First, load the following libraries. (You may need to install them using `install_packages` if you are using this for the first time.) Note that our team has our own [library that we use to pre-define functions used for postprocessing](https://github.com/BershteynLab/EMODAnalyzeR/tree/main/R), so it is an option for you to install and use those functions. Alternatively, you can define your own functions. You are also welcome to contribute to our postprocessing library.
+
 ```{r Load Libraries}
 library(tidyverse)
-library(tidyr)
 library(data.table)
 library(magrittr)
 library(ggplot2)
@@ -17,7 +18,7 @@ devtools::install_github("BershteynLab/EMODAnalyzeR")
 # Read in simulation output
 ```{r}
 
-res.path.cmd = "Path/to/tutorial/output/in/scratch/directory"
+res.path.cmd = "/gpfs/scratch/<YOUR_KID>/experiments/"
 
 sim.results <- EMODAnalyzeR::read.simulation.results.bigpurple(
   res.path.cmd,
@@ -52,9 +53,11 @@ sim.results <- sim.results %>%
 
 Read in prevalence calibration target data
 ```{r}
-ingest.file.base = "Path/to/ingest/file"
+ingest.file.base = "Data/calibration_ingest_form_Nyanza.xlsm"
 
 obs.prev.sheet.base <- EMODAnalyzeR::read.ingest.sheet(ingest.file.base, "Obs-Prevalence")
+
+obs.prev.sheet.base %>% head
 ```
 
 
@@ -74,3 +77,7 @@ p +
              filter(Province == 'All', AgeBin == "[15:50)", Gender %in% c("Male", "Female")),
              mapping = aes(x = Year, ymin = lb, ymax = ub))
 ```
+
+# Plot Incidence over time
+
+# Plot Mortality over time

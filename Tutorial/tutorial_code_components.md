@@ -3,7 +3,7 @@
 EMOD requires a large set of configuration files.
 
 1. Ingest form: `Data/calibration_ingest_form_Nyanza.xlsm`
-    * Contains a great deal of information which the simulation uses as inputs, including
+    * Containsx information which the simulation uses as inputs, including
         * List of dynamic parameters which will be fit during the calibration stage
         * List of calibration target variables and how the calibration stage should weight them
         * List of "nodes" or sub-populations in the model, what we use to define geographically isolated metapopulations
@@ -25,7 +25,8 @@ EMOD requires a large set of configuration files.
     5. Risk_Assortivity_Overlay: `InputFiles/Templates/Risk_Assortivity_Overlay.json`
         * Defines how different risk groups form partnerships
     6. Configuration file: `InputFiles/Templates/config.json`
-        * Overwrites all other parameter values, also useful for formatting outputs
+        * Overwrites all other parameter values
+        * Useful for formatting outputs, parameterize "reports"
         * (Not all of these parameters are required to build a functioning model, many of them are atavistic cruft relevant to other models that have been copy-pasted through)
 
 # Other scripts and files
