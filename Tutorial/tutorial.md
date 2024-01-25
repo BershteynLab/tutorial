@@ -31,7 +31,7 @@ Guide to postprocessing EMOD simulations [here](tutorial_postprocessing.md)
 
 ### Campaign File Guide
 
-* [Tutorial Campaign File](Config_Files/campaign_Nyanza_tutorial.json)
+* [Tutorial Campaign File](tutorial_campaign.md)
 
 ## Troubleshooting Guide
 

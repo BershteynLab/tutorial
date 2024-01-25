@@ -19,7 +19,7 @@
 # python optim_script.py
 
 # This line is used when there are provided tables of parameters
-python run_scenarios.py -c optim_script_transmission.py --resample-method provided --samples resampled_parameter_sets.csv --output-dir sim_output --suite-name sim_output --table scenarios.csv
+python run_scenarios.py -c optim_script.py --resample-method provided --samples resampled_parameter_sets_short.csv --output-dir sim_output --suite-name sim_output --table scenarios.csv
 
 # This line is used when instead you want to sample from the distribution of parameters
 #python run_scenarios.py -c optim_script.py --resample-method roulette --nsamples 250 --output-dir sim_output --suite-name sim_output --table scenarios.csv --calib-dir <CALIB_DIR>

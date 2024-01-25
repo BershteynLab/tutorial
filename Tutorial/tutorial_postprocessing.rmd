@@ -3,10 +3,9 @@ title: "tutorial_postprocessing"
 output: html_document
 ---
 
-First, load the following libraries. (You may need to install them using `install_packages` if you are using this for the first time.) Note that our team has our own [library that we use to pre-define functions used for postprocessing](https://github.com/BershteynLab/EMODAnalyzeR/tree/main/R), so it is an option for you to install and use those functions. Alternatively, you can define your own functions. You are also welcome to contribute to our postprocessing library.
-
 ```{r Load Libraries}
 library(tidyverse)
+library(tidyr)
 library(data.table)
 library(magrittr)
 library(ggplot2)
@@ -15,14 +14,28 @@ library(readxl)
 devtools::install_github("BershteynLab/EMODAnalyzeR")
 ```
 
+# Reading reports
+
+What do reports look like? Let's open a single report and examine it together:
+
+```{r}
+res.path = "Path/to/single/report/output/in/scratch/directory"
+
+report.example <- fread(file = res.path.cmd)
+
+View(report.example)
+
+```
+
+The formatting and columns of this report are controlled in `config.json`. If there is other information that you want from your simulation, you may need to alter the parameters of `config.json`, or you may need to use a different type of report.
+
 # Read in simulation output
 ```{r}
+res.path = "/gpfs/data/bershteynlab/EMOD/EMOD_tutorial_reports/"
 
-res.path.cmd = "/gpfs/scratch/<YOUR_KID>/experiments/"
-
-sim.results <- EMODAnalyzeR::read.simulation.results.bigpurple(
-  res.path.cmd,
-  scenario_name = 'minimal',
+sim.results <- EMODAnalyzeR::read.simulation.results(
+  res.path,
+  scenario_name = 'tutorial',
   summarize_columns = c("Population","Infected", "On_ART",
                         "Died", "Died_from_HIV",
                         "Newly.Infected","Diagnosed"),
@@ -51,21 +64,17 @@ sim.results <- sim.results %>%
 
 # Plot Prevalence over time
 
-Read in prevalence calibration target data
+Read in prevalence calibration target data from the ingest file
 ```{r}
-ingest.file.base = "Data/calibration_ingest_form_Nyanza.xlsm"
+ingest.file.base = "/gpfs/data/bershteynlab/EMOD/<YOUR KID>/tutorial/Data/calibration_ingest_form_Nyanza.xlsm"
 
 obs.prev.sheet.base <- EMODAnalyzeR::read.ingest.sheet(ingest.file.base, "Obs-Prevalence")
-
-obs.prev.sheet.base %>% head
 ```
 
-
+Calculate prevalence for adults age 15 to 50.
 ```{r, fig.width=8}
-#p <- EMODAnalyzeR::emodplot.prevalence(sim.results %>% filter(Age <= 50, Age >=15), 
-#                                       1990, 20240)
-p <- EMODAnalyzeR::emodplot.prevalence(sim.results %>% filter(Age <= 50, Age >=15), 
-                                       1960, 1991)
+p <- EMODAnalyzeR::emodplot.prevalence(sim.results %>% filter(Age <= 50, Age >=15),
+                                      1990, 2040)
 
 p +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), breaks = seq(0,0.25,0.05), limits=c(0, 0.25)) +
@@ -78,6 +87,32 @@ p +
              mapping = aes(x = Year, ymin = lb, ymax = ub))
 ```
 
-# Plot Incidence over time
-
 # Plot Mortality over time
+
+This code aggregates together the HIV-related deaths for adults age 15-50
+```{r}
+hivmort.data <- sim.results %>% 
+  filter(Age >= 15, Age < 50) %>% 
+  group_by(Year, Gender, sim.id, scenario_name) %>% 
+  # note that we need to use the population scaling factor here
+  summarize(Died_from_HIV = sum(Died_from_HIV * pop.scaling.factor), .groups = 'keep') %>% 
+  ungroup()
+
+```
+
+
+```{r}
+p <- EMODAnalyzeR::emodplot.by_gender(
+  hivmort.data,
+  date.start = 1990,
+  date.end = 2040,
+  col2plot = 'Died_from_HIV'
+)
+
+p
+```
+
+
+# Suggested activity: ART
+
+Let's practice! Extract ART usage data from the reports and plot it for men and women over time.
