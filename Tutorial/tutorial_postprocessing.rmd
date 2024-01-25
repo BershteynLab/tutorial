@@ -19,9 +19,9 @@ devtools::install_github("BershteynLab/EMODAnalyzeR")
 What do reports look like? Let's open a single report and examine it together:
 
 ```{r}
-res.path = "Path/to/single/report/output/in/scratch/directory"
+res.path = "/gpfs/data/bershteynlab/EMOD/EMOD_tutorial_reports/ReportHIVByAgeAndGender_TPI0001_REP42397.csv"
 
-report.example <- fread(file = res.path.cmd)
+report.example <- fread(file = res.path)
 
 View(report.example)
 
@@ -116,3 +116,7 @@ p
 # Suggested activity: ART
 
 Let's practice! Extract ART usage data from the reports and plot it for men and women over time.
+
+# Suggested activity: Discussion
+
+Let's discuss what sorts of research questions you have, and see if we can find ways to address those resesearch questions using EMOD
