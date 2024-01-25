@@ -24,6 +24,16 @@ git clone https://github.com/BershteynLab/tutorial.git
 cd tutorial
 ```
 
+Create a new branch, to keep track of your edits as you work:
+
+```
+git branch <YOUR NAME>
+
+git checkout <YOUR NAME>
+```
+
+You have downloaded the code, and have created your own personalized workspace for working with that code. Feel free to edit any documents you want and track your changes using git. The main branch will contain the original version of everything, which may help with debugging.
+
 ## Download and install EMOD-DTK
 
 ### Configure bash and python environments
