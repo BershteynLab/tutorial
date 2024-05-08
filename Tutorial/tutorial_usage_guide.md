@@ -3,7 +3,10 @@
 ## Running a Simulation
 
 1. Log on to BigPurple - either through SSH or VS Code's SSH function
-2. Run the simulation:
+
+2. Navigate to the tutorial directory in the command line
+
+3. Run the simulation:
 ```
 sbatch script.sbatch
 ```
