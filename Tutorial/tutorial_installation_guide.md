@@ -16,6 +16,8 @@ mkdir /gpfs/data/bershteynlab/EMOD/<YOUR_KID>
 cd /gpfs/data/bershteynlab/EMOD/<YOUR_KID>
 ```
 
+Make sure that you have access to git while you are logged in to BigPurple. To do this, you will need to [generate a public key on BigPurple](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [add it to your account on Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
+
 Clone our git repository.
 
 ```
@@ -99,7 +101,7 @@ Verify that the installation worked by running `dtk -h`. (If you do not get an e
 4. Install HIV-specific repo from github:
 
 ```
-git clone git clone git@github.com:InstituteforDiseaseModeling/HIV-Analyzers.git
+git clone git@github.com:InstituteforDiseaseModeling/HIV-Analyzers.git
 cd HIV-Analyzers
 python setup.py develop
 ```
