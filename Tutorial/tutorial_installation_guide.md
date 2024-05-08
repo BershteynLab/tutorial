@@ -94,6 +94,7 @@ We recommend installing these in your home directory, located at `/gpfs/home/<Yo
 git clone git@github.com:InstituteforDiseaseModeling/dtk-tools.git dtk-tools-p36
 cd dtk-tools-p36
 python setup_manual.py
+cd ..
 ```
 
 Verify that the installation worked by running `dtk -h`. (If you do not get an error, you will know the installation has worked.)
@@ -104,23 +105,10 @@ Verify that the installation worked by running `dtk -h`. (If you do not get an e
 git clone git@github.com:InstituteforDiseaseModeling/HIV-Analyzers.git
 cd HIV-Analyzers
 python setup.py develop
+cd ..
 ```
 
-5. Configure Docker image
-
-IDM provides Docker image files that contain the EMOD executable binary and execution environment for easy runtime and environment management. University cluster environments typically have Singularity installed which is able to run Docker images. Docker is unlikely to be available itself.
-
-To obtain the Docker image needed for building and executing EMOD, run:
-
-```
-mkdir images
-cd images
-singularity pull docker://idm-docker-public.packages.idmod.org/nyu/dtk:20200306
-```
-
-This will create file: dtk_20200306.sif. It will be referenced when configuring DTK-Tools to run EMOD.
-
-6. Configuring DTK-Tools to use slurm
+5. Configuring DTK-Tools to use slurm
 
 Slurm is the name of the high performance computing jobs scheduling system on BigPurple. Read more about it [here](https://hpcmed.org/guide/slurm).
 
