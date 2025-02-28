@@ -88,7 +88,7 @@ Write to Clark Kirkman <Clark.Kirkman@gatesfoundation.org> to request permission
 
 We recommend installing these in your home directory, located at `/gpfs/home/<Your_KID>`. Navigate there (you can use `cd ~`) before the following steps.
 
-3. Clone dtk-tools repo from github:
+3. Clone dtk-tools repo from github (this will not work if you have not already added your public key to GitHub):
 
 ```
 git clone git@github.com:InstituteforDiseaseModeling/dtk-tools.git dtk-tools-p36
