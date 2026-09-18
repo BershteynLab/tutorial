@@ -58,7 +58,7 @@ fi
 
 module load singularity/3.7.1
 module load python/cpu/3.6.5
-module load git/2.17.0
+module load git/2.49.0
 
 source ~/environments/dtk-tools-p36/bin/activate
 export PYTHONPATH=~/environments/dtk-tools-p36/lib/python3.6/site-packages
