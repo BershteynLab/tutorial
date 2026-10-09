@@ -80,9 +80,9 @@ Now, every time you log on to BigPurple you will be working inside the right pyt
 
 1. Request permissions
 
-Write to Clark Kirkman <Clark.Kirkman@gatesfoundation.org> to request permission to clone the following repos:
-* <https://github.com/InstituteforDiseaseModeling/dtk-tools>
-* <https://github.com/InstituteforDiseaseModeling/HIV-Analyzers>
+Write to Daniel Citron <daniel.citron@nyulangone.org> to request permission to clone the following repos:
+* <https://github.com/BershteynLab/dtk-tools>
+* <https://github.com/BershteynLab/HIV-Analyzers>
 
 2. Pick an appropriate directory to download these repos
 
@@ -91,7 +91,7 @@ We recommend installing these in your home directory, located at `/gpfs/home/<Yo
 3. Clone dtk-tools repo from github (this will not work if you have not already added your public key to GitHub):
 
 ```
-git clone git@github.com:InstituteforDiseaseModeling/dtk-tools.git dtk-tools-p36
+git clone git@github.com:BershteynLab/dtk-tools.git dtk-tools-p36
 cd dtk-tools-p36
 python setup_manual.py
 cd ..
@@ -102,7 +102,7 @@ Verify that the installation worked by running `dtk -h`. (If you do not get an e
 4. Install HIV-specific repo from github:
 
 ```
-git clone git@github.com:InstituteforDiseaseModeling/HIV-Analyzers.git
+git clone git@github.com:BershteynLab/HIV-Analyzers.git
 cd HIV-Analyzers
 python setup.py develop
 cd ..
